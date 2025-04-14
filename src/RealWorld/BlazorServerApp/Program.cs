@@ -1,19 +1,19 @@
 using BlazorServerApp.Components;
 using BlazorServerApp.Domain;
 using BlazorServerApp.Domain.Abstractions;
+using BlazorServerApp.Fakers;
 using BlazorServerApp.Infrastructures;
+using Bogus;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ICustomerRepository, FakeCustomerRepository>();
+builder.Services.AddSingleton<Faker<Customer>, CustomerFaker>();
 builder.Services.AddSingleton<List<Customer>>(sp =>
 {
-    var customers = new List<Customer>();
-    customers.Add(new Customer { Id = 1, Name = "Customer #1", Email = "a@domain.com" });
-    customers.Add(new Customer { Id = 2, Name = "Customer #2", Email = "b@domain.com" });
-    customers.Add(new Customer { Id = 3, Name = "Customer #3", Email = "c@domain.com" });
-    customers.Add(new Customer { Id = 4, Name = "Customer #4", Email = "d@domain.com" });
-    customers.Add(new Customer { Id = 5, Name = "Customer #5", Email = "e@domain.com" });
+    var faker = sp.GetRequiredService<Faker<Customer>>();
+
+    var customers = faker.Generate(100);
 
     return customers;
 });
