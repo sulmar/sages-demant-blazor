@@ -4,12 +4,11 @@
 @inject ICustomerRepository repository
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-
 <h3>Customer List</h3>
 
 @if (customers is null)
 {
-    <p><em>Loading...</em></p>
+    <LoaderComponent />
 }
 else
 {
