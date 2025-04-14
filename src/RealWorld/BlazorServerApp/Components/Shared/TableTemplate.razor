@@ -1,0 +1,50 @@
+﻿@typeparam T
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Items)
+        {
+            <tr>
+                <td>@item</td>
+
+             @*    <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td> *@
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                @if (Items.Count() == 0)
+                {
+                    <p><em>No items found.</em></p>
+                }
+                else
+                {
+                    <p>Total Items: @Items.Count()</p>
+                }
+            </td>
+        </tr>
+    </tfoot>
+
+
+
+</table>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public IEnumerable<T>? Items { get; set; }
+
+}
