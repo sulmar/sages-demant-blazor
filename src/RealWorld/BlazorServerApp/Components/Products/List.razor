@@ -12,47 +12,7 @@
 }
 else
 {
-    <table class="table">
-
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var product in products)
-            {
-                <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                    <td>@product.Price</td>
-                </tr>
-            }
-        </tbody>
-
-        <tfoot>
-            <tr>
-                <td colspan="3">
-                    @if (products.Count() == 0)
-                    {
-                        <p><em>No customers found.</em></p>
-                    }
-                    else
-                    {
-                        <p>Total Customers: @products.Count()</p>
-                    }
-                </td>
-            </tr>
-        </tfoot>
-
-
-
-    </table>
+    <ProductsTableTemplate Products="@products" />
 }
 
 
