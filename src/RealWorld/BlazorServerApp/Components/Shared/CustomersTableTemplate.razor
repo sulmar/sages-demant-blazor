@@ -1,43 +1,16 @@
 ﻿
-<table class="table">
-
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var customer in Customers)
-        {
-            <tr>
-                <td>@customer.Id</td>
-                <td>@customer.Name</td>
-                <td>@customer.Email</td>
-            </tr>
-        }
-    </tbody>
-
-    <tfoot>
-        <tr>
-            <td colspan="3">
-                @if (Customers.Count() == 0)
-                {
-                    <p><em>No customers found.</em></p>
-                }
-                else
-                {
-                    <p>Total Customers: @Customers.Count()</p>
-                }
-            </td>
-        </tr>
-    </tfoot>
-
-
-
-</table>
+<TableTemplate Items=@Customers>
+    <HeaderTemplate>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+    </HeaderTemplate>
+    <RowTemplate Context="customer">
+        <td>@customer.Id</td>
+        <td>@customer.Name</td>
+        <td>@customer.Email</td>
+    </RowTemplate>
+</TableTemplate>
 
 @code {
 
