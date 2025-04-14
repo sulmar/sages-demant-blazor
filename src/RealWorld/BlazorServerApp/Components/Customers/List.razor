@@ -2,7 +2,8 @@
 @using BlazorServerApp.Domain
 @using BlazorServerApp.Domain.Abstractions
 @inject ICustomerRepository repository
-@rendermode InteractiveServer
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
 
 <h3>Customer List</h3>
 
@@ -12,12 +13,45 @@
 }
 else
 {
-    <ul>
-        @foreach (var customer in customers)
-        {
-            <li>@customer.Id @customer.Name @customer.Email</li>
-        }
-    </ul>
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var customer in customers)
+            {
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.Email</td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    @if (customers.Count() == 0)
+                    {
+                        <p><em>No customers found.</em></p>
+                    }
+                    else
+                    {
+                        <p>Total Customers: @customers.Count()</p>
+                    }
+                </td>
+            </tr>
+        </tfoot>
+
+
+
+    </table>
 }
 
 
