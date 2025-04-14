@@ -10,12 +10,17 @@
 }
 else
 {
-    <TableTemplate Items=@customers >
+    <TableTemplate Items=@customers>
         <HeaderTemplate>
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
         </HeaderTemplate>
+        <RowTemplate>
+            <td>@context.Id</td>
+            <td>@context.Name</td>
+            <td>@context.Email</td>
+        </RowTemplate>
     </TableTemplate>
 }
 

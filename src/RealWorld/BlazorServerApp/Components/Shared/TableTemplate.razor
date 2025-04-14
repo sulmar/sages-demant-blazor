@@ -12,11 +12,7 @@
         @foreach (var item in Items)
         {
             <tr>
-                <td>@item</td>
-
-                @*    <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Email</td> *@
+                @RowTemplate(item)               
             </tr>
         }
     </tbody>
@@ -47,5 +43,8 @@
 
     [Parameter, EditorRequired]
     public required RenderFragment HeaderTemplate { get; set; }
+
+    [Parameter, EditorRequired]
+    public required RenderFragment<T> RowTemplate { get; set; }
 
 }
