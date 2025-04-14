@@ -18,6 +18,17 @@ builder.Services.AddSingleton<List<Customer>>(sp =>
     return customers;
 });
 
+builder.Services.AddSingleton<IProductRepository, FakeProductRepository>();
+builder.Services.AddSingleton<Faker<Product>, ProductFaker>();
+builder.Services.AddSingleton<List<Product>>(sp =>
+{
+    var faker = sp.GetRequiredService<Faker<Product>>();
+
+    var products = faker.Generate(100);
+
+    return products;
+});
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

@@ -1,13 +1,12 @@
-﻿@page "/customers"
+﻿@page "/products"
 @using BlazorServerApp.Domain
 @using BlazorServerApp.Domain.Abstractions
-@inject ICustomerRepository repository
+@inject IProductRepository repository
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
+<h3>Products List</h3>
 
-<h3>Customer List</h3>
-
-@if (customers is null)
+@if (products is null)
 {
     <p><em>Loading...</em></p>
 }
@@ -19,17 +18,19 @@ else
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Description</th>
+                <th>Price</th>
             </tr>
         </thead>
 
         <tbody>
-            @foreach (var customer in customers)
+            @foreach (var product in products)
             {
                 <tr>
-                    <td>@customer.Id</td>
-                    <td>@customer.Name</td>
-                    <td>@customer.Email</td>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
                 </tr>
             }
         </tbody>
@@ -37,13 +38,13 @@ else
         <tfoot>
             <tr>
                 <td colspan="3">
-                    @if (customers.Count() == 0)
+                    @if (products.Count() == 0)
                     {
                         <p><em>No customers found.</em></p>
                     }
                     else
                     {
-                        <p>Total Customers: @customers.Count()</p>
+                        <p>Total Customers: @products.Count()</p>
                     }
                 </td>
             </tr>
@@ -55,14 +56,13 @@ else
 }
 
 
-
 @code {
 
-    private IEnumerable<Customer>? customers;
+    private IEnumerable<Product>? products;
 
     protected override async Task OnInitializedAsync()
     {
-        customers = await repository.GetAllAsync();
+        products = await repository.GetAllAsync();
     }
 
 }

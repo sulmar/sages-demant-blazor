@@ -3,41 +3,9 @@ using BlazorServerApp.Domain.Abstractions;
 
 namespace BlazorServerApp.Infrastructures;
 
-public class FakeCustomerRepository : ICustomerRepository
+public class FakeCustomerRepository : FakeEntityRepository<Customer>, ICustomerRepository
 {
-    private readonly IDictionary<int, Customer> _customers;
-
-    public FakeCustomerRepository(List<Customer> customers)
-    {        
-
-        _customers = customers.ToDictionary(c => c.Id);
-    }
-
-
-    public Task AddAsync(Customer customer)
+    public FakeCustomerRepository(List<Customer> entities) : base(entities)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<Customer>> GetAllAsync()
-    {
-        await Task.Delay(2000); // Simulate a delay
-
-        return _customers.Values.AsEnumerable();
-    }
-
-    public Task<Customer> GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(Customer customer)
-    {
-        throw new NotImplementedException();
     }
 }

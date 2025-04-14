@@ -1,10 +1,7 @@
 ﻿namespace BlazorServerApp.Domain.Abstractions;
 
-public interface ICustomerRepository
+public interface ICustomerRepository : IEntityRepository<Customer>
 {
-    Task<IEnumerable<Customer>> GetAllAsync();
-    Task<Customer> GetByIdAsync(int id);
-    Task AddAsync(Customer customer);
-    Task UpdateAsync(Customer customer);
-    Task DeleteAsync(int id);
 }
+
+
