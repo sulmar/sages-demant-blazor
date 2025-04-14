@@ -16,10 +16,10 @@ else
             <th>Name</th>
             <th>Email</th>
         </HeaderTemplate>
-        <RowTemplate>
-            <td>@context.Id</td>
-            <td>@context.Name</td>
-            <td>@context.Email</td>
+        <RowTemplate Context="customer">
+            <td>@customer.Id</td>
+            <td>@customer.Name</td>
+            <td>@customer.Email</td>
         </RowTemplate>
     </TableTemplate>
 }
