@@ -3,5 +3,6 @@
 
 @code {
 
-    private string Title { get; set; } = "Loading...";
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = "Loading...";
 }
