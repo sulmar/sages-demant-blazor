@@ -1,0 +1,26 @@
+﻿@page "/customers"
+
+<h3>Customer List</h3>
+
+<ul>
+    @foreach (var customer in customers)
+    {
+        <li>@customer</li>
+    }
+</ul>
+
+@code {
+
+    private List<string> customers = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        customers.Add("Customer #1");
+        customers.Add("Customer #2");
+        customers.Add("Customer #3");
+        customers.Add("Customer #4");
+        customers.Add("Customer #5");
+    }
+
+
+}
