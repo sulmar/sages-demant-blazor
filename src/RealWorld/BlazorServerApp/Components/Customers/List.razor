@@ -1,12 +1,34 @@
 ﻿@page "/customers"
 @using BlazorServerApp.Domain
+@using BlazorServerApp.Domain.Abstractions
+@inject ICustomerRepository repository
+@rendermode InteractiveServer
 
 <h3>Customer List</h3>
 
-<ul>
-    @foreach (var customer in customers)
-    {
-        <li>@customer.Id @customer.Name @customer.Email</li>
-    }
-</ul>
+@if (customers is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var customer in customers)
+        {
+            <li>@customer.Id @customer.Name @customer.Email</li>
+        }
+    </ul>
+}
 
+
+
+@code {
+
+    private IEnumerable<Customer> customers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await repository.GetAllAsync();
+    }
+
+}

@@ -1,6 +1,10 @@
 using BlazorServerApp.Components;
+using BlazorServerApp.Domain.Abstractions;
+using BlazorServerApp.Infrastructures;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<ICustomerRepository, FakeCustomerRepository>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
