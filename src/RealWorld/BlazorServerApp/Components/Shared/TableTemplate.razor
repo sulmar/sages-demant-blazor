@@ -4,9 +4,7 @@
 
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
+          @HeaderTemplate
         </tr>
     </thead>
 
@@ -16,7 +14,7 @@
             <tr>
                 <td>@item</td>
 
-             @*    <td>@item.Id</td>
+                @*    <td>@item.Id</td>
                 <td>@item.Name</td>
                 <td>@item.Email</td> *@
             </tr>
@@ -46,5 +44,8 @@
 
     [Parameter, EditorRequired]
     public IEnumerable<T>? Items { get; set; }
+
+    [Parameter, EditorRequired]
+    public required RenderFragment HeaderTemplate { get; set; }
 
 }

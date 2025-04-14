@@ -10,7 +10,14 @@
 }
 else
 {
-    <TableTemplate Items="@products" />
+    <TableTemplate Items="@products">
+        <HeaderTemplate>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </HeaderTemplate>
+    </TableTemplate>
 }
 
 
