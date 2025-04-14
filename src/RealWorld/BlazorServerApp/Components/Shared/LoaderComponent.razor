@@ -1,8 +1,15 @@
 ﻿
 <p><em>@Title</em></p>
 
+
+@ChildContent
+
+
 @code {
 
     [Parameter, EditorRequired]
     public string Title { get; set; } = "Loading...";
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }   // nazwa ma znaczenie
 }
