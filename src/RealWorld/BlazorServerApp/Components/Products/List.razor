@@ -4,6 +4,14 @@
 
 <h3>Products List</h3>
 
+<div>
+    <form method="post">
+        <label for="searchText">Type search text:</label>
+        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText @bind:event="oninput" @bind:after="@HandleSearch" />
+        <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
+    </form>
+</div>
+
 @if (products is null)
 {
     <LoaderComponent Title="Loading products" />
@@ -30,10 +38,16 @@ else
 @code {
 
     private IEnumerable<Product>? products;
+    private string searchText { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         products = await repository.GetAllAsync();
     }
 
+
+    private async Task HandleSearch()
+    {
+        products = await repository.GetByTextAsync(searchText);
+    }
 }
