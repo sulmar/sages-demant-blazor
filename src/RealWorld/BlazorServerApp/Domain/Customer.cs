@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BlazorServerApp.Domain;
+﻿namespace BlazorServerApp.Domain;
 
 public abstract class Base
 {
@@ -14,17 +12,9 @@ public abstract class BaseEntity
     
 public class Customer : BaseEntity
 {
-    [Required, MaxLength(10), MinLength(3)]
     public string Name { get; set; }
-
-    [Required]
-    [EmailAddress]
     public string Email { get; set; }
-    
     public string HashedPassword { get; set; }
-
-    [Compare("HashedPassword", ErrorMessage = "The password and confirmation password do not match.")]
     public string ConfirmedPassword { get; set; }
-
     public bool IsDeleted { get; set; }
 }
