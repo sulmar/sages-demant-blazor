@@ -12,9 +12,11 @@
 }
 else
 {
-    <StateCascadingValues theme="@theme">
-        <ProductsTableTemplate Products="@products" />
-    </StateCascadingValues>
+    <ThemeCascadingValues>
+        <StateCascadingValues theme="@theme">
+            <ProductsTableTemplate Products="@products" />
+        </StateCascadingValues>
+    </ThemeCascadingValues>
 }
 
 
