@@ -47,7 +47,7 @@
     [Parameter, EditorRequired]
     public required RenderFragment<T> RowTemplate { get; set; }
 
-    [Parameter]
+    [CascadingParameter]
     public string Theme { get; set; } = "light";
 
 }

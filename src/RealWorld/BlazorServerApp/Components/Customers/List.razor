@@ -14,7 +14,10 @@
 }
 else
 {
-    <CustomersTableTemplate Customers="@customers" Theme="dark" />
+    <CascadingValue Value="@theme">
+        <CustomersTableTemplate Customers="@customers" />
+    </CascadingValue>
+    
 }
 
 
