@@ -11,6 +11,10 @@ public class FakeCustomerRepository : FakeEntityRepository<Customer>, ICustomerR
 
     public async Task<IEnumerable<Customer>> GetByTextAsync(string text)
     {
+        if (string.IsNullOrEmpty(text))
+            return Enumerable.Empty<Customer>();
+
+
         await Task.Delay(500);
 
         return _entities.Select(p => p.Value).Where(c => c.Name.Contains(text) || c.Email.Contains(text));

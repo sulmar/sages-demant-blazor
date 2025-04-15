@@ -16,7 +16,11 @@ public class FakeProductRepository : FakeEntityRepository<Product>, IProductRepo
 
     public async Task<IEnumerable<Product>> GetByTextAsync(string text)
     {
+        if (string.IsNullOrEmpty(text))
+            return Enumerable.Empty<Product>();
+
         await Task.Delay(500);
+
         return _entities.Select(p => p.Value)
             .Where(c => c.Name.Contains(text, StringComparison.OrdinalIgnoreCase) 
             || c.Description.Contains(text, StringComparison.OrdinalIgnoreCase) || c.Price.ToString().Contains(text));

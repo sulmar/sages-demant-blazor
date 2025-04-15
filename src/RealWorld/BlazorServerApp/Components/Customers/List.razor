@@ -14,10 +14,13 @@
 }
 else
 {
-    <CascadingValue Value="@theme">
-        <CustomersTableTemplate Customers="@customers" />
+
+    <CascadingValue Value="@margin">
+        <CascadingValue Value="@theme">
+            <CustomersTableTemplate Customers="@customers" />
+        </CascadingValue>
     </CascadingValue>
-    
+
 }
 
 
@@ -26,6 +29,8 @@ else
     private IEnumerable<Customer>? customers;
 
     private string theme = "dark";
+
+    private int margin = 1;
 
     protected override async Task OnInitializedAsync()
     {
@@ -36,8 +41,8 @@ else
     {
         if (e.Code == "Enter" || e.Code == "NumpadEnter")
         {
-            Console.WriteLine("Enter key pressed"); 
-            
+            Console.WriteLine("Enter key pressed");
+
         }
     }
 

@@ -1,6 +1,6 @@
 ﻿@typeparam T where T : BaseEntity
 
-<table class="table table-@Theme">
+<table class="table table-@Theme m-@Margin">
 
     <thead>
         <tr>
@@ -49,5 +49,8 @@
 
     [CascadingParameter]
     public string Theme { get; set; } = "light";
+
+    [CascadingParameter]
+    public int Margin { get; set; } = 0;
 
 }
