@@ -1,4 +1,4 @@
-﻿@page "/customers/view/{id}"
+﻿@page "/customers/view/{id:int}"
 
 <h3>View</h3>
 
@@ -7,6 +7,6 @@ Customer Id = @Id
 @code {
 
     [Parameter]
-    public string Id { get; set; }
+    public int Id { get; set; }
 
 }
