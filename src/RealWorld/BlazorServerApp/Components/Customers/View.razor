@@ -1,0 +1,12 @@
+﻿@page "/customers/view/{id}"
+
+<h3>View</h3>
+
+Customer Id = @Id
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+}
