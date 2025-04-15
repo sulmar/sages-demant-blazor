@@ -1,0 +1,45 @@
+﻿@page "/customers/edit/{id:int}"
+@inject ICustomerRepository repository
+
+<h3>Edit</h3>
+
+@if (customer is null)
+{
+    <LoaderComponent Title="Loading customer...">
+        <img src="https://placehold.co/300x300" />
+    </LoaderComponent>
+}
+else
+{
+    <EditForm Model="@customer" OnValidSubmit="HandleUpdate" FormName="editCustomer">
+        
+        <label for="name">Name: </label>
+        <InputText id="name" @bind-Value="customer.Name" />
+
+        <label for="email">Email: </label>
+        <InputText id="email" @bind-Value="customer.Email" />
+
+        <button type="submit" class="btn btn-primary">Save</button>
+     
+    </EditForm>
+   
+}
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private Customer customer;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        customer = await repository.GetByIdAsync(Id);
+    }
+
+    private async Task HandleUpdate()
+    {
+        await repository.UpdateAsync(customer);
+    }
+}

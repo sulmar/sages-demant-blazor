@@ -17,7 +17,9 @@ public class FakeEntityRepository<T> : IEntityRepository<T>
 
     public Task AddAsync(T entity)
     {
-        throw new NotImplementedException();
+        _entities.Add(entity.Id, entity);
+
+        return Task.CompletedTask;
     }
 
     public Task DeleteAsync(int id)
@@ -41,8 +43,9 @@ public class FakeEntityRepository<T> : IEntityRepository<T>
         return _entities.TryGetValue(id, out var entity) ? entity : null;
     }
 
-    public Task UpdateAsync(T entity)
+    public async Task UpdateAsync(T entity)
     {
-        throw new NotImplementedException();
+        await DeleteAsync(entity.Id);
+        await AddAsync(entity);
     }
 }

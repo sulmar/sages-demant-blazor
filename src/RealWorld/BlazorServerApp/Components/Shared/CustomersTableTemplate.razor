@@ -12,6 +12,7 @@
         <td>@customer.Name</td>
         <td>@customer.Email</td>
         <td><a href="/customers/view/@customer.Id" class="btn btn-primary">View</a></td>
+        <td><a href="/customers/edit/@customer.Id" class="btn btn-secondary">Edit</a></td>
         <td><button type="button" @onclick=@(()=>HandleDelete(customer)) class="btn btn-danger">Delete</button></td>
     </RowTemplate>
 </TableTemplate>
