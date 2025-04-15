@@ -7,7 +7,8 @@
 <div>
     <form method="post">
         <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText @bind:event="oninput" @bind:after="@HandleSearch" />
+        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText @bind:event="oninput" @bind:after="@HandleSearch"
+               @onkeydown="@HandleOnKeyDown"  />
         <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
     </form>
 </div>
@@ -33,6 +34,15 @@ else
     protected override async Task OnInitializedAsync()
     {
         customers = await repository.GetAllAsync();
+    }
+
+    private async Task HandleOnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Code == "Enter" || e.Code == "NumpadEnter")
+        {
+            Console.WriteLine("Enter key pressed"); 
+            
+        }
     }
 
     private async Task HandleSearch()
