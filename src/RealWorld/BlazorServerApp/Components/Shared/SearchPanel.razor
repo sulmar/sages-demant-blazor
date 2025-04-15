@@ -1,8 +1,7 @@
 <div>
     <form method="post">
         <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText @bind:event="oninput" @bind:after="@HandleSearch"
-        />
+        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText @bind:event="oninput" @bind:after="@HandleSearch" @ref=searchTextElementReference />
         <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
     </form>
 </div>
@@ -11,6 +10,8 @@
 
     private string searchText { get; set; }
 
+    private ElementReference searchTextElementReference;
+
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; } 
 
@@ -18,5 +19,15 @@
     {
         await ValueChanged.InvokeAsync(searchText);
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await searchTextElementReference.FocusAsync();
+        };        
+    }
+
+    
 
 }
