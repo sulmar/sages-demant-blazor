@@ -14,13 +14,15 @@
 }
 else
 {
-    <CustomersTableTemplate Customers="@customers" />
+    <CustomersTableTemplate Customers="@customers" Theme="dark" />
 }
 
 
 @code {
 
     private IEnumerable<Customer>? customers;
+
+    private string theme = "dark";
 
     protected override async Task OnInitializedAsync()
     {

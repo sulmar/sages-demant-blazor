@@ -1,6 +1,6 @@
 ﻿@typeparam T where T : BaseEntity
 
-<table class="table">
+<table class="table table-@Theme">
 
     <thead>
         <tr>
@@ -46,5 +46,8 @@
 
     [Parameter, EditorRequired]
     public required RenderFragment<T> RowTemplate { get; set; }
+
+    [Parameter]
+    public string Theme { get; set; } = "light";
 
 }

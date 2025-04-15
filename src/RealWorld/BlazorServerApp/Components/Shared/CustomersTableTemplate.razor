@@ -1,5 +1,5 @@
 ﻿
-<TableTemplate Items=@Customers>
+<TableTemplate Items=@Customers Theme="@Theme">
     <HeaderTemplate>
         <th>Id</th>
         <th>Name</th>
@@ -16,5 +16,8 @@
 
     [Parameter, EditorRequired]
     public IEnumerable<Customer>? Customers { get; set; }
+
+    [Parameter]
+    public string Theme { get; set; }
 
 }
