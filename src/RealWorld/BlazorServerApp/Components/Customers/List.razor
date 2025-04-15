@@ -14,13 +14,9 @@
 }
 else
 {
-    <CascadingValue Value="@theme" Name="MyTheme">
-        <CascadingValue Value="@margin">
-            <CascadingValue Value="@status" Name="MyStatus">
-                <CustomersTableTemplate Customers="@customers" />
-            </CascadingValue>
-        </CascadingValue>
-    </CascadingValue>
+    <StateCascadingValues>
+        <CustomersTableTemplate Customers="@customers" />
+    </StateCascadingValues>
 }
 
 
@@ -28,11 +24,7 @@ else
 
     private IEnumerable<Customer>? customers;
 
-    private string theme = "dark";
-
-    private int margin = 1;
-
-    private string status = "inactive";
+    
 
     protected override async Task OnInitializedAsync()
     {

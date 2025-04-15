@@ -1,0 +1,24 @@
+﻿
+<CascadingValue Value="@theme" Name="MyTheme">
+    <CascadingValue Value="@margin">
+        <CascadingValue Value="@status" Name="MyStatus">
+            @ChildContent
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue>
+
+
+@code {
+
+    [Parameter]
+    public string theme { get; set; } = "dark";
+
+    [Parameter]
+    public int margin  { get; set; } = 1;
+
+    [Parameter]
+    public string status { get; set; } = "inactive";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

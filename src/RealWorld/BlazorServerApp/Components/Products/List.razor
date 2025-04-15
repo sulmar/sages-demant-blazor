@@ -12,26 +12,17 @@
 }
 else
 {
-    <TableTemplate Items="@products">
-        <HeaderTemplate>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-        </HeaderTemplate>
-        <RowTemplate>
-            <td>@context.Id</td>
-            <td>@context.Name</td>
-            <td>@context.Description</td>
-            <td>@context.Price</td>
-        </RowTemplate>
-    </TableTemplate>
+    <StateCascadingValues theme="@theme">
+        <ProductsTableTemplate Products="@products" />
+    </StateCascadingValues>
 }
 
 
 @code {
 
     private IEnumerable<Product>? products;
+
+    private string theme = "light";
 
     protected override async Task OnInitializedAsync()
     {

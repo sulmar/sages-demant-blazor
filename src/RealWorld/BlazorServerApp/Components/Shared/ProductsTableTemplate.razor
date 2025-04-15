@@ -1,44 +1,20 @@
 @using BlazorServerApp.Domain
 @using BlazorServerApp.Domain.Abstractions
 
-<table class="table">
-
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var product in Products)
-        {
-            <tr>
-                <td>@product.Id</td>
-                <td>@product.Name</td>
-                <td>@product.Description</td>
-                <td>@product.Price</td>
-            </tr>
-        }
-    </tbody>
-
-    <tfoot>
-        <tr>
-            <td colspan="3">
-                @if (Products.Count() == 0)
-                {
-                    <p><em>No customers found.</em></p>
-                }
-                else
-                {
-                    <p>Total Customers: @Products.Count()</p>
-                }
-            </td>
-        </tr>
-    </tfoot>
-</table>
+<TableTemplate Items="@Products">
+    <HeaderTemplate>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.Id</td>
+        <td>@context.Name</td>
+        <td>@context.Description</td>
+        <td>@context.Price</td>
+    </RowTemplate>
+</TableTemplate>
 
 
 @code {
