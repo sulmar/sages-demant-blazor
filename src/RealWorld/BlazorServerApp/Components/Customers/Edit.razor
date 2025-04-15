@@ -1,5 +1,8 @@
 ﻿@page "/customers/edit/{id:int}"
+@using Blazored.FluentValidation
+@using FluentValidation
 @inject ICustomerRepository repository
+@inject IValidator<Customer> validator
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <h3>Edit</h3>
@@ -12,9 +15,11 @@
 }
 else
 {
-    <EditForm Model="@customer" OnValidSubmit="HandleUpdate" FormName="editCustomer">
+    <EditForm Model="@customer" OnValidSubmit="HandleUpdate" FormName="editCustomer" >
 
-        <DataAnnotationsValidator />
+        @* <DataAnnotationsValidator /> *@
+
+        <FluentValidationValidator />
 
         <ValidationSummary />
 
@@ -48,6 +53,8 @@ else
 
     private async Task HandleUpdate()
     {
+        var result  = await validator.ValidateAsync(customer);
+
         await repository.UpdateAsync(customer);
     }
 }
