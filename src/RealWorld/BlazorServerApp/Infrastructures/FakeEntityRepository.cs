@@ -22,7 +22,9 @@ public class FakeEntityRepository<T> : IEntityRepository<T>
 
     public Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        _entities.Remove(id);
+
+        return Task.CompletedTask;
     }
 
     public async Task<IEnumerable<T>> GetAllAsync()
