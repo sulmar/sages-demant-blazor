@@ -1,6 +1,6 @@
 ﻿@typeparam T where T : BaseEntity
 
-<table class="table table-@Theme m-@Margin">
+<table class="table table-@Theme m-@Margin status-@Status">
 
     <thead>
         <tr>
@@ -47,8 +47,11 @@
     [Parameter, EditorRequired]
     public required RenderFragment<T> RowTemplate { get; set; }
 
-    [CascadingParameter]
+    [CascadingParameter(Name = "MyTheme")]
     public string Theme { get; set; } = "light";
+
+    [CascadingParameter(Name = "MyStatus")]
+    public string Status { get; set; } = "active";
 
     [CascadingParameter]
     public int Margin { get; set; } = 0;
