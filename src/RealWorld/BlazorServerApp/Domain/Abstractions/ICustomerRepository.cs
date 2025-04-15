@@ -2,6 +2,7 @@
 
 public interface ICustomerRepository : IEntityRepository<Customer>
 {
+    Task<IEnumerable<Customer>> GetByTextAsync(string text);
 }
 
 

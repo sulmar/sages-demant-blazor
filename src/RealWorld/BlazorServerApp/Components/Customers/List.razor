@@ -4,15 +4,23 @@
 
 <h3>Customer List</h3>
 
+<div>
+    <form method="post">
+        <label for="searchText">Type search text:</label>
+        <input type="text" id="searchText" name="text" class="form-control" @bind-value=@searchText />
+        <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
+    </form>
+</div>
+
 @if (customers is null)
 {
     <LoaderComponent Title="Loading customers...">
-       <img src="https://placehold.co/300x300" />
+        <img src="https://placehold.co/300x300" />
     </LoaderComponent>
 }
 else
 {
-   <CustomersTableTemplate Customers="@customers" />
+    <CustomersTableTemplate Customers="@customers" />
 }
 
 
@@ -20,9 +28,16 @@ else
 
     private IEnumerable<Customer>? customers;
 
+    private string searchText = "a";
+
     protected override async Task OnInitializedAsync()
     {
         customers = await repository.GetAllAsync();
+    }
+
+    private async Task HandleSearch()
+    {
+        customers = await repository.GetByTextAsync(searchText);
     }
 
 }
