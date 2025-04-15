@@ -4,14 +4,7 @@
 
 <h3>Customer List</h3>
 
-<div>
-    <form method="post">
-        <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText @bind:event="oninput" @bind:after="@HandleSearch"
-               @onkeydown="@HandleOnKeyDown"  />
-        <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
-    </form>
-</div>
+<SearchPanel ValueChanged="@HandleSearch" />
 
 @if (customers is null)
 {
@@ -29,8 +22,6 @@ else
 
     private IEnumerable<Customer>? customers;
 
-    private string searchText { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
         customers = await repository.GetAllAsync();
@@ -45,7 +36,7 @@ else
         }
     }
 
-    private async Task HandleSearch()
+    private async Task HandleSearch(string searchText)
     {
         customers = await repository.GetByTextAsync(searchText);
     }
