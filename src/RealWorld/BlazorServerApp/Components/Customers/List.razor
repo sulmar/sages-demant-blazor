@@ -7,7 +7,7 @@
 <div>
     <form method="post">
         <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText />
+        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText @bind:event="oninput" @bind:after="@HandleSearch" />
         <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
     </form>
 </div>
@@ -28,7 +28,7 @@ else
 
     private IEnumerable<Customer>? customers;
 
-    private string searchText = "a";
+    private string searchText { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
