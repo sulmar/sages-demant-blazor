@@ -7,7 +7,7 @@
 <div>
     <form method="post">
         <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" name="text" class="form-control" @bind-value=@searchText />
+        <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText />
         <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
     </form>
 </div>
