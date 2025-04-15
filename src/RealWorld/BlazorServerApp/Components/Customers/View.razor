@@ -1,12 +1,37 @@
 ﻿@page "/customers/view/{id:int}"
+@inject ICustomerRepository repository
 
 <h3>View</h3>
 
 Customer Id = @Id
 
+@if (customer is null)
+{
+    <LoaderComponent Title="Loading customer...">
+        <img src="https://placehold.co/300x300" />
+    </LoaderComponent>
+}
+else
+{
+    <h2>@customer.Name</h2>
+    <em>@customer.Email</em>
+}
+
 @code {
 
     [Parameter]
     public int Id { get; set; }
+
+    private Customer customer;
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        customer = await repository.GetByIdAsync(Id);        
+    }
 
 }

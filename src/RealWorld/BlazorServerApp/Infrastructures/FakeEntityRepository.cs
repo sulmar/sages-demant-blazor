@@ -32,9 +32,11 @@ public class FakeEntityRepository<T> : IEntityRepository<T>
         return _entities.Values.AsEnumerable();
     }
 
-    public Task<T> GetByIdAsync(int id)
+    public async Task<T> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        await Task.Delay(2000); // Simulate a delay
+
+        return _entities.TryGetValue(id, out var entity) ? entity : null;
     }
 
     public Task UpdateAsync(T entity)
