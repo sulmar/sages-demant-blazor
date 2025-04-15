@@ -16,11 +16,15 @@ else
 
         <DataAnnotationsValidator />
 
+        <ValidationSummary />
+
         <label for="name">Name: </label>
         <InputText id="name" @bind-Value="@customer.Name" />
+        <ValidationMessage For="@(() => customer.Name)" />
 
         <label for="email">Email: </label>
         <InputText id="email" @bind-Value="@customer.Email" />
+        <ValidationMessage For="@(() => customer.Email)" />
 
         <button type="submit" class="btn btn-primary">Save</button>
 

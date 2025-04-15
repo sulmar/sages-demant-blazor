@@ -21,5 +21,10 @@ public class Customer : BaseEntity
     [EmailAddress]
     public string Email { get; set; }
     
+    public string HashedPassword { get; set; }
+
+    [Compare("HashedPassword", ErrorMessage = "The password and confirmation password do not match.")]
+    public string ConfirmedPassword { get; set; }
+
     public bool IsDeleted { get; set; }
 }
