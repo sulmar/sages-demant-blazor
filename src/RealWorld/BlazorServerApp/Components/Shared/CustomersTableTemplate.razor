@@ -4,11 +4,13 @@
         <th>Id</th>
         <th>Name</th>
         <th>Email</th>
+        <th></th>
     </HeaderTemplate>
     <RowTemplate Context="customer">
         <td>@customer.Id</td>
         <td>@customer.Name</td>
         <td>@customer.Email</td>
+        <td><a href="/customers/view/@customer.Id">View</a></td>
     </RowTemplate>
 </TableTemplate>
 
