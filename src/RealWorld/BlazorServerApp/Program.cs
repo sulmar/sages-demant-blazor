@@ -1,3 +1,4 @@
+using BlazorServerApp;
 using BlazorServerApp.BackgroundServices;
 using BlazorServerApp.Components;
 using BlazorServerApp.Domain;
@@ -50,6 +51,8 @@ builder.Services.AddHttpClient("nbp", client =>
 builder.Services.AddSignalR();
 
 builder.Services.AddHostedService<DashboardBackgroundService>();
+
+builder.Services.AddTransient<LocalStorage>();
 
 var app = builder.Build();
 

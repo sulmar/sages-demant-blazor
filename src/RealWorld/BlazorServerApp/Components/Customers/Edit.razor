@@ -3,7 +3,7 @@
 @using FluentValidation
 @inject ICustomerRepository repository
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
-@inject IJSRuntime JS
+@inject LocalStorage LocalStorage
 
 <h3>Edit</h3>
 
@@ -50,14 +50,12 @@ else
         if (customer is null)
             customer = await repository.GetByIdAsync(Id);
 
-        await JS.InvokeVoidAsync("console.log", "Hello Blazor!");
-
         var key = $"customer:{customer.Id}:email";
         var value = customer.Email;
 
-        await JS.InvokeVoidAsync("localStorage.setItem", key, value);
+        await LocalStorage.SetItem(key, value);
 
-        var email = await JS.InvokeAsync<string>("localStorage.getItem", key);
+        var email = LocalStorage.GetItem(key);
     }
 
     private async Task HandleUpdate()
