@@ -1,6 +1,7 @@
 ﻿@page "/dashboard"
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager Navigation
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <h3>Dashboard</h3>
 
@@ -12,13 +13,21 @@
 }
 else
 {
-    @info.CustomerCount
+    <article>
+        @info.CustomerCount
+    </article>
 
-    @info.ProductCount
+    <article>
+        @info.ProductCount
+    </article>
 
-    @info.AvgPrice
+    <article>
+        @info.AvgPrice
+    </article>
 
-    @info.Status
+    <article>
+        @info.Status
+    </article>
 }
 
 
@@ -33,8 +42,15 @@ else
             .WithUrl(Navigation.ToAbsoluteUri("/signalr/dashboard"))
             .Build();
 
+        connection.On<Info>("UpdateInfo", info =>
+        {
+            this.info = info;
+
+            InvokeAsync(StateHasChanged);
+        });
+
         await connection.StartAsync();
-        
+
     }
 
 }

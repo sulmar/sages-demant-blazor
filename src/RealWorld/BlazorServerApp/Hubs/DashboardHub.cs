@@ -27,6 +27,11 @@ public class DashboardHub : Hub
 
     override public Task OnDisconnectedAsync(Exception? exception)
     {
+        if (exception != null)
+        {
+            _logger.LogError(exception, "Client disconnected: {ConnectionId}", Context.ConnectionId);
+        }
+
         _logger.LogInformation("Client disconnected: {ConnectionId}", Context.ConnectionId);
 
         return base.OnDisconnectedAsync(exception);
