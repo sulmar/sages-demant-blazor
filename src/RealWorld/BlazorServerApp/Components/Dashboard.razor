@@ -1,0 +1,40 @@
+﻿@page "/dashboard"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager Navigation
+
+<h3>Dashboard</h3>
+
+@if (info is null)
+{
+    <LoaderComponent Title="Awaiting for data...">
+        <img src="https://placehold.co/300x300" />
+    </LoaderComponent>
+}
+else
+{
+    @info.CustomerCount
+
+    @info.ProductCount
+
+    @info.AvgPrice
+
+    @info.Status
+}
+
+
+@code {
+    private Info? info;
+
+    private HubConnection connection;
+
+    override protected async Task OnInitializedAsync()
+    {
+        connection = new HubConnectionBuilder()
+            .WithUrl(Navigation.ToAbsoluteUri("/signalr/dashboard"))
+            .Build();
+
+        await connection.StartAsync();
+        
+    }
+
+}

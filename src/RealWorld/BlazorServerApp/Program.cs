@@ -2,6 +2,7 @@ using BlazorServerApp.Components;
 using BlazorServerApp.Domain;
 using BlazorServerApp.Domain.Abstractions;
 using BlazorServerApp.Fakers;
+using BlazorServerApp.Hubs;
 using BlazorServerApp.Infrastructures;
 using BlazorServerApp.Services;
 using Bogus;
@@ -45,6 +46,8 @@ builder.Services.AddHttpClient("nbp", client =>
     client.BaseAddress = new Uri("https://api.nbp.pl");
 });
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,5 +66,7 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.MapHub<DashboardHub>("/signalr/dashboard");
 
 app.Run();
