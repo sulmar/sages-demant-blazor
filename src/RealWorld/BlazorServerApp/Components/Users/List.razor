@@ -1,0 +1,31 @@
+﻿@page "/users"
+@inject HttpClient Http 
+
+<h3>List</h3>
+
+@if (users is null)
+{
+    <LoaderComponent Title="Loading users" />
+}
+else
+{
+    <ul>
+        @foreach (var user in users)
+        {
+            <li>@user.name</li>
+            <li>@user.company.name</li>
+            <li>@user.email</li>
+        }
+    </ul>
+}
+
+@code {
+
+    private List<User>? users;
+
+    override protected async Task OnInitializedAsync()
+    {
+        users = await Http.GetFromJsonAsync<List<User>>("/users");
+    }
+
+}

@@ -33,6 +33,8 @@ builder.Services.AddSingleton<List<Product>>(sp =>
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddScoped<HttpClient>(sp => new HttpClient { BaseAddress = new Uri("https://jsonplaceholder.typicode.com") });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
