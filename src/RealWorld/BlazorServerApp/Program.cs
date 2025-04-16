@@ -1,3 +1,4 @@
+using BlazorServerApp.BackgroundServices;
 using BlazorServerApp.Components;
 using BlazorServerApp.Domain;
 using BlazorServerApp.Domain.Abstractions;
@@ -48,6 +49,8 @@ builder.Services.AddHttpClient("nbp", client =>
 
 builder.Services.AddSignalR();
 
+builder.Services.AddHostedService<DashboardBackgroundService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -68,5 +71,7 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.MapHub<DashboardHub>("/signalr/dashboard");
+
+
 
 app.Run();
