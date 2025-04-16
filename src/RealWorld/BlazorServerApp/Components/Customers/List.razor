@@ -1,5 +1,7 @@
 ﻿@page "/customers"
 @page "/klienci"
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager navigation
 
 @inject ICustomerRepository repository
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
@@ -31,6 +33,12 @@ else
     protected override async Task OnInitializedAsync()
     {
         customers = await repository.GetAllAsync();
+
+        var uri = navigation.ToAbsoluteUri(navigation.Uri);
+
+        var query = QueryHelpers.ParseQuery(uri.Query);
+
+
     }
 
     private async Task HandleOnKeyDown(KeyboardEventArgs e)
