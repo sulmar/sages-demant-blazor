@@ -30,6 +30,8 @@ public class DashboardBackgroundService : BackgroundService
 
             await hubContext.Clients.All.SendAsync("UpdateInfo", info);
 
+           // await hubContext.Clients.Group("a").SendAsync("UpdateInfo", info);
+
             await Task.Delay(Random.Shared.Next(500, 2000));
         }
 

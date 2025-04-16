@@ -22,6 +22,10 @@ public class DashboardHub : Hub
         // dobra praktyka!
         _logger.LogInformation("Client connected: {ConnectionId}", Context.ConnectionId);
 
+        //var groupName = Context.User.Claims.SingleOrDefault(p => p.Type == "Company").Value;
+
+        //this.Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+        
         return base.OnConnectedAsync();
     }
 
