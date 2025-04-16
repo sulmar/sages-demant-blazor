@@ -1,5 +1,6 @@
 ﻿@page "/users"
-@inject IHttpClientFactory factory
+@using BlazorServerApp.Services
+@inject IUserService Api
 
 <h3>List</h3>
 
@@ -21,13 +22,11 @@ else
 
 @code {
 
-    private List<User>? users;
+    private IList<User>? users;
 
     override protected async Task OnInitializedAsync()
     {
-        var Http = factory.CreateClient("jsonplaceholder");
-
-        users = await Http.GetFromJsonAsync<List<User>>("/users");
+        users = await Api.GetAllAsync();
     }
 
 }

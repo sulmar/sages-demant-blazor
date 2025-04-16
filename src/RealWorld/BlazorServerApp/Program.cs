@@ -3,6 +3,7 @@ using BlazorServerApp.Domain;
 using BlazorServerApp.Domain.Abstractions;
 using BlazorServerApp.Fakers;
 using BlazorServerApp.Infrastructures;
+using BlazorServerApp.Services;
 using Bogus;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,7 +34,7 @@ builder.Services.AddSingleton<List<Product>>(sp =>
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpClient("jsonplaceholder", client =>
+builder.Services.AddHttpClient<IUserService, JsonPlaceholderUserService>(client =>
 {
     client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
