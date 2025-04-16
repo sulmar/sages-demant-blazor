@@ -51,6 +51,13 @@ else
             customer = await repository.GetByIdAsync(Id);
 
         await JS.InvokeVoidAsync("console.log", "Hello Blazor!");
+
+        var key = $"customer:{customer.Id}:email";
+        var value = customer.Email;
+
+        await JS.InvokeVoidAsync("localStorage.setItem", key, value);
+
+        var email = await JS.InvokeAsync<string>("localStorage.getItem", key);
     }
 
     private async Task HandleUpdate()
