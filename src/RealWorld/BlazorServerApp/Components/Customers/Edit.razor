@@ -3,6 +3,7 @@
 @using FluentValidation
 @inject ICustomerRepository repository
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
+@inject IJSRuntime JS
 
 <h3>Edit</h3>
 
@@ -48,6 +49,8 @@ else
     {
         if (customer is null)
             customer = await repository.GetByIdAsync(Id);
+
+        await JS.InvokeVoidAsync("console.log", "Hello Blazor!");
     }
 
     private async Task HandleUpdate()
