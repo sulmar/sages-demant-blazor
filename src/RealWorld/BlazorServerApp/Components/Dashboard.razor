@@ -37,12 +37,16 @@ else
 
     private HubConnection connection;
 
-  
-
     override protected async Task OnInitializedAsync()
     {
         connection = new HubConnectionBuilder()
             .WithUrl(Navigation.ToAbsoluteUri("/signalr/dashboard"))
+            .ConfigureLogging(logging =>
+            {
+                logging.AddConsole();
+                logging.SetMinimumLevel(LogLevel.Debug);
+            })
+            .WithAutomaticReconnect()
             .Build();
 
         connection.On<Info>("UpdateInfo", info =>
@@ -55,7 +59,6 @@ else
         await connection.StartAsync();
 
     }
-
 
     public async ValueTask DisposeAsync()
     {
