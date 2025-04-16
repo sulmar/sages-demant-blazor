@@ -2,7 +2,6 @@
 @using Blazored.FluentValidation
 @using FluentValidation
 @inject ICustomerRepository repository
-@inject IValidator<Customer> validator
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <h3>Edit</h3>
@@ -53,8 +52,6 @@ else
 
     private async Task HandleUpdate()
     {
-        var result  = await validator.ValidateAsync(customer);
-
         await repository.UpdateAsync(customer);
     }
 }
