@@ -1,4 +1,6 @@
 ﻿@inject ICustomerRepository repository
+@inject NavigationManager navigation
+@using Microsoft.AspNetCore.WebUtilities
 
 <TableTemplate Items=@Customers>
     <HeaderTemplate>
@@ -25,6 +27,17 @@
     private async Task HandleDelete(Customer customer)
     {
         await repository.DeleteAsync(customer.Id);
+
+        var query = new Dictionary<string, string>
+            {
+                ["text"] = "Abc",
+                ["city"] = "Warsaw"
+            };
+        
+        // dotnet package Microsoft.AspNetCore.Utilities
+        var url = QueryHelpers.AddQueryString("/customers", query);
+
+        navigation.NavigateTo(url);
     }
 
 }
