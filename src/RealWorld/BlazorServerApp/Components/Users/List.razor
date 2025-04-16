@@ -1,5 +1,5 @@
 ﻿@page "/users"
-@inject HttpClient Http 
+@inject IHttpClientFactory factory
 
 <h3>List</h3>
 
@@ -25,6 +25,8 @@ else
 
     override protected async Task OnInitializedAsync()
     {
+        var Http = factory.CreateClient("jsonplaceholder");
+
         users = await Http.GetFromJsonAsync<List<User>>("/users");
     }
 

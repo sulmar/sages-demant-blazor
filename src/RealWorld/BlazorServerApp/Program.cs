@@ -33,7 +33,16 @@ builder.Services.AddSingleton<List<Product>>(sp =>
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddScoped<HttpClient>(sp => new HttpClient { BaseAddress = new Uri("https://jsonplaceholder.typicode.com") });
+builder.Services.AddHttpClient("jsonplaceholder", client =>
+{
+    client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
+    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+});
+
+builder.Services.AddHttpClient("nbp", client =>
+{
+    client.BaseAddress = new Uri("https://api.nbp.pl");
+});
 
 var app = builder.Build();
 
