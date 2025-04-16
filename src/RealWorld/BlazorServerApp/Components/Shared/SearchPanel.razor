@@ -1,8 +1,8 @@
 <div>
-    <form method="post">
+    <form method="get">
         <label for="searchText">Type search text:</label>
         <input type="text" id="searchText" name="text" class="form-control" @bind=@searchText @bind:event="oninput" @bind:after="@HandleSearch" @ref=searchTextElementReference />
-        <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 
@@ -10,7 +10,7 @@
 
     private string searchText;
 
-    [SupplyParameterFromQuery]
+    [SupplyParameterFromQuery(Name = "text")]
     [Parameter]
     public string SearchText { get; set; }
 
