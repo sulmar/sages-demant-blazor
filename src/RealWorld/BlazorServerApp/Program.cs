@@ -1,4 +1,5 @@
 using BlazorServerApp;
+using BlazorServerApp.Authorization;
 using BlazorServerApp.BackgroundServices;
 using BlazorServerApp.Components;
 using BlazorServerApp.Domain;
@@ -8,6 +9,9 @@ using BlazorServerApp.Hubs;
 using BlazorServerApp.Infrastructures;
 using BlazorServerApp.Services;
 using Bogus;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +57,31 @@ builder.Services.AddSignalR();
 builder.Services.AddHostedService<DashboardBackgroundService>();
 
 builder.Services.AddTransient<LocalStorage>();
+
+/*
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+})
+    .AddIdentityCookies();
+
+builder.Services.AddCascadingAuthenticationState();
+
+builder.Services.AddAuthorizationCore(options =>
+{
+    options.AddPolicy("AdultPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("DateOfBirth");
+        policy.Requirements.Add(new AdultRequirement(18));
+    });
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, AdultRequirementHandler>();
+
+*/
 
 var app = builder.Build();
 

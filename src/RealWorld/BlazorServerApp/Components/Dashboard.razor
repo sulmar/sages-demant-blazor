@@ -1,8 +1,14 @@
 ﻿@page "/dashboard"
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.SignalR.Client
+@using Microsoft.AspNetCore.Components.Authorization
 @inject NavigationManager Navigation
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 @implements IAsyncDisposable
+
+@* @attribute [Authorize] *@
+
+
 
 <h3>Dashboard</h3>
 
@@ -22,13 +28,17 @@ else
         @info.ProductCount
     </article>
 
-    <article>
-        @info.AvgPrice
-    </article>
+    <AuthorizeView Policy="AdultPolicy">
+        <article>
+            @info.AvgPrice
+        </article>
 
-    <article>
-        @info.Status
-    </article>
+        <article>
+            @info.Status
+        </article>
+    </AuthorizeView>
+
+   
 }
 
 
