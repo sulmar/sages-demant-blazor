@@ -8,7 +8,11 @@
 
 @code {
 
-    private string searchText { get; set; }
+    private string searchText;
+
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public string SearchText { get; set; }
 
     private ElementReference searchTextElementReference;
 
@@ -18,6 +22,13 @@
     private async Task HandleSearch()
     {
         await ValueChanged.InvokeAsync(searchText);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        searchText = SearchText;
+
+        await HandleSearch();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
