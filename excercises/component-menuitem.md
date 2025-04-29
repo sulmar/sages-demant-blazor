@@ -1,6 +1,7 @@
 # Ćwiczenie: Refaktoryzacja komponentu NavMenu.razor w Blazor
 
-## Cel: Zrefaktoryzować istniejący komponent `NavMenu.razor` w aplikacji Blazor poprzez stworzenie reużywalnego komponentu MenuItem, który uprości strukturę menu nawigacyjnego i zwiększy jego czytelność oraz elastyczność.
+## Cel: 
+Zrefaktoryzować istniejący komponent `NavMenu.razor` w aplikacji Blazor poprzez stworzenie reużywalnego komponentu MenuItem, który uprości strukturę menu nawigacyjnego i zwiększy jego czytelność oraz elastyczność.
 
 ## Opis problemu:
 Aktualny kod w NavMenu.razor zawiera powtarzające się elementy menu w następującej formie:
